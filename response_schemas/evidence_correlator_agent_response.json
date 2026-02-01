@@ -1,0 +1,90 @@
+{
+  "agent_name": "Evidence Correlator Agent",
+  "agent_id": "697ebd97d36f070193f5dfb1",
+  "agent_purpose": "analyzer",
+  "description": "Correlates GPS, device, and user evidence for dispute analysis",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "location_match": {
+        "gps_near_merchant": "boolean",
+        "distance_miles": "number",
+        "time_correlation": "string"
+      },
+      "device_analysis": {
+        "device_fingerprint_match": "boolean",
+        "device_name": "null",
+        "previously_used": "boolean",
+        "session_count": "number"
+      },
+      "authorized_user_analysis": {
+        "possible_family_member": "boolean",
+        "identified_user": "null",
+        "evidence": "null"
+      },
+      "evidence_strength": "string",
+      "summary": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "error",
+    "result": {
+      "location_match": {
+        "gps_near_merchant": false,
+        "distance_miles": 0.5,
+        "time_correlation": "none"
+      },
+      "device_analysis": {
+        "device_fingerprint_match": false,
+        "device_name": null,
+        "previously_used": false,
+        "session_count": 0
+      },
+      "authorized_user_analysis": {
+        "possible_family_member": false,
+        "identified_user": null,
+        "evidence": null
+      },
+      "evidence_strength": "weak",
+      "summary": "Insufficient data provided for analysis. No transaction, GPS, device, or authorized user information detected."
+    },
+    "metadata": {
+      "agent_name": "Evidence Correlator Agent",
+      "timestamp": "2024-07-04T21:35:18Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-01T02:42:40.131089",
+  "test_message_used": "Analyze this sample data for testing",
+  "actual_test_response": {
+    "status": "error",
+    "result": {
+      "location_match": {
+        "gps_near_merchant": false,
+        "distance_miles": 0.5,
+        "time_correlation": "none"
+      },
+      "device_analysis": {
+        "device_fingerprint_match": false,
+        "device_name": null,
+        "previously_used": false,
+        "session_count": 0
+      },
+      "authorized_user_analysis": {
+        "possible_family_member": false,
+        "identified_user": null,
+        "evidence": null
+      },
+      "evidence_strength": "weak",
+      "summary": "Insufficient data provided for analysis. No transaction, GPS, device, or authorized user information detected."
+    },
+    "metadata": {
+      "agent_name": "Evidence Correlator Agent",
+      "timestamp": "2024-07-04T21:35:18Z"
+    }
+  }
+}

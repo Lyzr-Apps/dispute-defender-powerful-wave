@@ -1,0 +1,110 @@
+{
+  "agent_name": "Risk Scoring Agent",
+  "agent_id": "697ebdaf066158e77fde65ab",
+  "agent_purpose": "analyzer",
+  "description": "Calculates friendly fraud probability score (0-100) based on account analysis",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "friendly_fraud_score": "number",
+      "risk_level": "string",
+      "account_analysis": {
+        "account_age_days": "number",
+        "deposit_pattern": "string",
+        "avg_monthly_deposits": "number",
+        "account_health": "string"
+      },
+      "dispute_history": {
+        "total_disputes": "number",
+        "disputes_won": "number",
+        "disputes_lost": "number",
+        "recent_dispute_count_90d": "number",
+        "pattern": "string"
+      },
+      "fraud_database_findings": {
+        "flags_found": "boolean",
+        "severity": "string",
+        "details": "string"
+      },
+      "risk_factors": [
+        "string"
+      ],
+      "recommendation": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "friendly_fraud_score": 48,
+      "risk_level": "medium",
+      "account_analysis": {
+        "account_age_days": 210,
+        "deposit_pattern": "regular",
+        "avg_monthly_deposits": 1800.0,
+        "account_health": "good"
+      },
+      "dispute_history": {
+        "total_disputes": 2,
+        "disputes_won": 1,
+        "disputes_lost": 1,
+        "recent_dispute_count_90d": 1,
+        "pattern": "stable"
+      },
+      "fraud_database_findings": {
+        "flags_found": false,
+        "severity": "none",
+        "details": "No fraud flags found in third-party databases"
+      },
+      "risk_factors": [
+        "Moderate dispute frequency within last 90 days",
+        "Account tenure slightly under 1 year"
+      ],
+      "recommendation": "review"
+    },
+    "metadata": {
+      "agent_name": "Risk Scoring Agent",
+      "timestamp": "2024-06-12T18:03:53Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-01T02:43:04.722810",
+  "test_message_used": "Analyze this sample data for testing",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "friendly_fraud_score": 48,
+      "risk_level": "medium",
+      "account_analysis": {
+        "account_age_days": 210,
+        "deposit_pattern": "regular",
+        "avg_monthly_deposits": 1800.0,
+        "account_health": "good"
+      },
+      "dispute_history": {
+        "total_disputes": 2,
+        "disputes_won": 1,
+        "disputes_lost": 1,
+        "recent_dispute_count_90d": 1,
+        "pattern": "stable"
+      },
+      "fraud_database_findings": {
+        "flags_found": false,
+        "severity": "none",
+        "details": "No fraud flags found in third-party databases"
+      },
+      "risk_factors": [
+        "Moderate dispute frequency within last 90 days",
+        "Account tenure slightly under 1 year"
+      ],
+      "recommendation": "review"
+    },
+    "metadata": {
+      "agent_name": "Risk Scoring Agent",
+      "timestamp": "2024-06-12T18:03:53Z"
+    }
+  }
+}

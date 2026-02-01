@@ -1,0 +1,80 @@
+{
+  "agent_name": "Merchant Intelligence Agent",
+  "agent_id": "697ebd81066158e77fde65a4",
+  "agent_purpose": "parser",
+  "description": "Decodes cryptic merchant descriptors and identifies subscription patterns",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "decoded_merchant_name": "string",
+      "merchant_category": "string",
+      "is_recurring_charge": "boolean",
+      "subscription_pattern": {
+        "detected": "boolean",
+        "frequency": "null",
+        "last_charges": [
+          "any"
+        ]
+      },
+      "merchant_metadata": {
+        "location": "string",
+        "business_type": "string",
+        "network_data": "string"
+      },
+      "confidence_score": "number"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "error",
+    "result": {
+      "decoded_merchant_name": "",
+      "merchant_category": "",
+      "is_recurring_charge": false,
+      "subscription_pattern": {
+        "detected": false,
+        "frequency": null,
+        "last_charges": []
+      },
+      "merchant_metadata": {
+        "location": "",
+        "business_type": "",
+        "network_data": ""
+      },
+      "confidence_score": 0.0
+    },
+    "metadata": {
+      "agent_name": "Merchant Intelligence Agent",
+      "timestamp": "2024-06-15T00:58:02Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-01T02:42:17.076732",
+  "test_message_used": "Parse this sample text for testing",
+  "actual_test_response": {
+    "status": "error",
+    "result": {
+      "decoded_merchant_name": "",
+      "merchant_category": "",
+      "is_recurring_charge": false,
+      "subscription_pattern": {
+        "detected": false,
+        "frequency": null,
+        "last_charges": []
+      },
+      "merchant_metadata": {
+        "location": "",
+        "business_type": "",
+        "network_data": ""
+      },
+      "confidence_score": 0.0
+    },
+    "metadata": {
+      "agent_name": "Merchant Intelligence Agent",
+      "timestamp": "2024-06-15T00:58:02Z"
+    }
+  }
+}

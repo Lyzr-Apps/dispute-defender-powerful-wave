@@ -1,0 +1,55 @@
+{
+  "workflow_status": "complete",
+  "agents_created": 5,
+  "agents": {
+    "case_manager_agent": {
+      "agent_id": "697ebdccd36f070193f5dfb2",
+      "name": "Case Manager Agent",
+      "type": "manager",
+      "status": "created",
+      "schema_saved": true,
+      "managed_agents": [
+        "697ebd81066158e77fde65a4",
+        "697ebd97d36f070193f5dfb1",
+        "697ebdaf066158e77fde65ab"
+      ]
+    },
+    "merchant_intelligence_agent": {
+      "agent_id": "697ebd81066158e77fde65a4",
+      "name": "Merchant Intelligence Agent",
+      "type": "sub_agent",
+      "status": "created",
+      "schema_saved": true
+    },
+    "evidence_correlator_agent": {
+      "agent_id": "697ebd97d36f070193f5dfb1",
+      "name": "Evidence Correlator Agent",
+      "type": "sub_agent",
+      "status": "created",
+      "schema_saved": true
+    },
+    "risk_scoring_agent": {
+      "agent_id": "697ebdaf066158e77fde65ab",
+      "name": "Risk Scoring Agent",
+      "type": "sub_agent",
+      "status": "created",
+      "schema_saved": true
+    },
+    "resolution_agent": {
+      "agent_id": "697ebde7066158e77fde65b5",
+      "name": "Resolution Agent",
+      "type": "independent",
+      "status": "created",
+      "schema_saved": true
+    }
+  },
+  "response_schemas": [
+    "response_schemas/case_manager_agent_response.json",
+    "response_schemas/merchant_intelligence_agent_response.json",
+    "response_schemas/evidence_correlator_agent_response.json",
+    "response_schemas/risk_scoring_agent_response.json",
+    "response_schemas/resolution_agent_response.json"
+  ],
+  "created_at": "2026-02-01T00:00:00Z",
+  "last_updated": "2026-02-01T00:00:00Z"
+}

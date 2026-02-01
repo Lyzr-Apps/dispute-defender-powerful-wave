@@ -1,0 +1,111 @@
+{
+  "agent_name": "Resolution Agent",
+  "agent_id": "697ebde7066158e77fde65b5",
+  "agent_purpose": "custom",
+  "description": "Executes dispute resolutions including credits and chargebacks",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "resolution_type": "string",
+      "actions_taken": [
+        "string"
+      ],
+      "chargeback_details": {
+        "filed": "boolean",
+        "network": "string",
+        "reason_code": "string",
+        "reason_description": "string",
+        "filing_date": "string",
+        "expected_resolution_date": "string"
+      },
+      "credit_details": {
+        "processed": "boolean",
+        "amount": "number",
+        "transaction_id": "string",
+        "posted_date": "null"
+      },
+      "tracking": {
+        "case_id": "string",
+        "status": "string",
+        "timeline_days": "number",
+        "next_action_date": "string"
+      },
+      "customer_notification": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "resolution_type": "chargeback",
+      "actions_taken": [
+        "Chargeback filed with Visa reason code 13.1"
+      ],
+      "chargeback_details": {
+        "filed": true,
+        "network": "Visa",
+        "reason_code": "13.1",
+        "reason_description": "Merchandise/Services Not Received",
+        "filing_date": "2025-02-01",
+        "expected_resolution_date": "2025-03-15"
+      },
+      "credit_details": {
+        "processed": false,
+        "amount": 0,
+        "transaction_id": "TXN123456",
+        "posted_date": null
+      },
+      "tracking": {
+        "case_id": "CASE-2025-001234",
+        "status": "pending",
+        "timeline_days": 42,
+        "next_action_date": "2025-02-15"
+      },
+      "customer_notification": "A chargeback has been filed with Visa. You will be updated as soon as a final decision is reached, expected by March 15, 2025."
+    },
+    "metadata": {
+      "agent_name": "Resolution Agent",
+      "timestamp": "2025-02-01T16:00:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-01T02:44:00.411721",
+  "test_message_used": "Provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "resolution_type": "chargeback",
+      "actions_taken": [
+        "Chargeback filed with Visa reason code 13.1"
+      ],
+      "chargeback_details": {
+        "filed": true,
+        "network": "Visa",
+        "reason_code": "13.1",
+        "reason_description": "Merchandise/Services Not Received",
+        "filing_date": "2025-02-01",
+        "expected_resolution_date": "2025-03-15"
+      },
+      "credit_details": {
+        "processed": false,
+        "amount": 0,
+        "transaction_id": "TXN123456",
+        "posted_date": null
+      },
+      "tracking": {
+        "case_id": "CASE-2025-001234",
+        "status": "pending",
+        "timeline_days": 42,
+        "next_action_date": "2025-02-15"
+      },
+      "customer_notification": "A chargeback has been filed with Visa. You will be updated as soon as a final decision is reached, expected by March 15, 2025."
+    },
+    "metadata": {
+      "agent_name": "Resolution Agent",
+      "timestamp": "2025-02-01T16:00:00Z"
+    }
+  }
+}

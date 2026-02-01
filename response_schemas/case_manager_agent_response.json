@@ -1,0 +1,59 @@
+{
+  "agent_name": "Case Manager Agent",
+  "agent_id": "697ebdccd36f070193f5dfb2",
+  "agent_purpose": "manager",
+  "description": "Aggregates evidence from sub-agents into comprehensive case summary with fraud score",
+  "response_schema": {
+    "status": "string (success|error)",
+    "result": {
+      "final_output": "object (aggregated result from sub-agents)",
+      "sub_agent_results": [
+        {
+          "agent_name": "string",
+          "status": "string",
+          "output": "object"
+        }
+      ],
+      "summary": "string",
+      "workflow_completed": "boolean"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string (ISO)",
+      "sub_agents_used": [
+        "string"
+      ]
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "final_output": {
+        "aggregated": "data from all sub-agents"
+      },
+      "sub_agent_results": [
+        {
+          "agent_name": "Sub-Agent 1",
+          "status": "success",
+          "output": {
+            "data": "result"
+          }
+        }
+      ],
+      "summary": "All sub-agents completed successfully",
+      "workflow_completed": true
+    },
+    "metadata": {
+      "agent_name": "Case Manager Agent",
+      "timestamp": "2025-01-15T10:30:00Z",
+      "sub_agents_used": [
+        "Sub-Agent 1"
+      ]
+    }
+  },
+  "is_actual_tested": false,
+  "test_timestamp": null,
+  "test_message_used": "Process this request and coordinate sub-agents",
+  "raw_test_response": "To proceed effectively, I need a bit more information about your dispute. Could you please provide the following details:\n\n1. The reason for your dispute (e.g., unauthorized transaction, product not received, defective item, etc.)\n2. The transaction amount and date, if known\n3. The merchant name as it appears on your statement\n4. Any other relevant information you think may help our investigation\n\nYour detailed input will help me best coordinate our specialist agents and provide a thorough, fair review.",
+  "test_error": "Response not valid JSON: Expecting value: line 1 column 1 (char 0)"
+}
