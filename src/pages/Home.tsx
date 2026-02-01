@@ -56,6 +56,28 @@ const VARO_COLORS = {
   red: '#EF4444'
 }
 
+// Helper function to parse nested JSON responses
+function parseNestedResponse(result: any): any {
+  try {
+    // If raw_response exists and contains nested JSON string
+    if (result.raw_response) {
+      const rawData = JSON.parse(result.raw_response)
+
+      // Check if response field contains a JSON string
+      if (rawData.response && typeof rawData.response === 'string') {
+        const innerData = JSON.parse(rawData.response)
+        return innerData.result || innerData
+      }
+    }
+
+    // Return the original result.response.result
+    return result.response?.result || {}
+  } catch (e) {
+    console.error('Error parsing nested response:', e)
+    return result.response?.result || {}
+  }
+}
+
 // TypeScript Interfaces from Response Schemas
 
 // Merchant Intelligence Agent Response
@@ -462,15 +484,47 @@ function IntakeScreen({ onComplete }: { onComplete: (caseData: Case) => void }) 
         AGENT_IDS.CASE_MANAGER
       )
 
+      // Parse the response - handle nested JSON string
+      const parsedResult = parseNestedResponse(result)
+
+      // Debug logging
+      console.log('=== Case Manager Response Debug ===')
+      console.log('Full result:', result)
+      console.log('Parsed result:', parsedResult)
+
       if (result.success && result.response.status === 'success') {
+        let agentMessage = "Thank you for that information. I'm analyzing the transaction now..."
+
+        // Try to extract meaningful message from the response
+        if (parsedResult.case_summary) {
+          // If we have a case summary, show merchant analysis or dispute reason
+          agentMessage = parsedResult.case_summary.merchant_analysis ||
+                        parsedResult.case_summary.dispute_reason ||
+                        "I've completed the initial analysis. Let me gather more evidence..."
+        } else if (parsedResult.summary) {
+          agentMessage = parsedResult.summary
+        } else if (parsedResult.interviewer_notes) {
+          agentMessage = parsedResult.interviewer_notes
+        }
+
         const agentResponse: ChatMessage = {
           id: (Date.now() + 1).toString(),
           sender: 'agent',
-          message: result.response.result.summary || "Thank you for that information. I'm analyzing the transaction now...",
+          message: agentMessage,
           timestamp: new Date().toLocaleTimeString()
         }
         setMessages(prev => [...prev, agentResponse])
         setProgress(66) // investigation stage
+
+        // Update evidence preview if we have case summary
+        if (parsedResult.case_summary) {
+          setEvidencePreview({
+            gps_match: parsedResult.case_summary.evidence_findings?.includes('GPS') || false,
+            device_match: parsedResult.case_summary.evidence_findings?.includes('device') || false,
+            merchant_decoded: parsedResult.case_summary.merchant_analysis || 'Analysis in progress...',
+            risk_score: parsedResult.case_summary.overall_fraud_likelihood_score || 0
+          })
+        }
       } else {
         const agentResponse: ChatMessage = {
           id: (Date.now() + 1).toString(),
@@ -481,6 +535,7 @@ function IntakeScreen({ onComplete }: { onComplete: (caseData: Case) => void }) 
         setMessages(prev => [...prev, agentResponse])
       }
     } catch (error) {
+      console.error('Agent call error:', error)
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         sender: 'agent',
@@ -888,8 +943,15 @@ function DetailScreen({ caseData, onBack }: { caseData: Case; onBack: () => void
         AGENT_IDS.RESOLUTION
       )
 
+      // Parse the response - handle nested JSON string
+      const parsedResult = parseNestedResponse(result)
+
+      console.log('=== Resolution Response Debug ===')
+      console.log('Full result:', result)
+      console.log('Parsed result:', parsedResult)
+
       if (result.success && result.response.status === 'success') {
-        setResolution(result.response.result as ResolutionResult)
+        setResolution(parsedResult as ResolutionResult)
       }
     } catch (error) {
       console.error('Resolution error:', error)
